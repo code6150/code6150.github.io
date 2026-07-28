@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>처음 쓰는 법 — 물방울 픽셀아트 에디터</title>
+<meta name="description" content="도구 다섯 개와 레이어, 단축키만 알면 됩니다. 물방울 에디터를 5분 만에 익히는 가이드.">
+<link rel="canonical" href="https://mulbangul.com/guide-start.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="home" href="./"><b>물방울</b><span>pixel studio</span></a>
+  <div class="links">
+    <a href="guide-start.html">사용법</a>
+    <a href="guide-unity.html">유니티</a>
+    <a href="guide-making.html">개발기</a>
+    <a class="go" href="editor.html">에디터 열기</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <p class="eyebrow" style="margin-top:44px">가이드 01</p>
+  <h1 style="margin-top:0">처음 쓰는 법</h1>
+  <p class="lede">도구는 다섯 개뿐입니다. 그림판 써봤으면 절반은 아는 셈이고, 나머지는 레이어랑 단축키입니다.</p>
+
+  <h2>캔버스 크기부터</h2>
+  <p>왼쪽 위 '새 캔버스'를 누르면 가로세로를 정할 수 있습니다. 최대 256×256까지 됩니다.</p>
+  <p>물방울 렌더링은 픽셀 하나하나를 곡선으로 바꾸는 방식이라, 캔버스가 크면 클수록 효과가 안 보입니다. 128×128쯤 되면 한 픽셀이 화면에서 너무 작아서 그냥 매끈한 그림처럼 보여요. <strong>이 효과를 살리려면 16×16에서 48×48 사이</strong>가 제일 낫습니다. 아이콘이나 이펙트 스프라이트 크기라고 생각하면 됩니다.</p>
+  <p>참고로 크기를 새로 만들면 지금 그리던 건 사라집니다. 확인 창이 안 뜨니 주의하세요. 저도 여기서 한 번 날려먹었습니다.</p>
+
+  <h2>도구 다섯 개</h2>
+  <ul>
+    <li><strong>연필(B)</strong> — 드래그하면 이어서 그려집니다. 빨리 움직여도 선이 끊기지 않게 점 사이를 채워줍니다.</li>
+    <li><strong>지우개(E)</strong> — 완전히 투명하게 만듭니다. 반투명 지우기는 없습니다.</li>
+    <li><strong>채우기(G)</strong> — 같은 색으로 이어진 영역을 한 번에 칠합니다. 대각선으로만 닿은 칸은 안 넘어갑니다.</li>
+    <li><strong>스포이드(I)</strong> — 화면에 보이는 색을 집어옵니다. <code>Alt</code>를 누른 채로 클릭해도 같은 동작이라 이쪽이 더 편합니다.</li>
+    <li><strong>영역 선택(M)</strong> — 드래그해서 사각형 범위를 잡습니다.</li>
+  </ul>
+  <p>브러시 굵기는 오른쪽 패널 슬라이더나 <code>[</code> <code>]</code> 키로 1~8까지 바꿉니다. 물방울 효과를 쓸 거면 굵기 1로 한 칸씩 찍는 게 결과가 제일 예쁩니다. 굵게 칠하면 그냥 덩어리가 돼서 방울 느낌이 안 나요.</p>
+
+  <h2>영역 선택이 은근히 강력합니다</h2>
+  <p>범위를 잡아두면 그 안에서만 그려집니다. 밖으로 삐져나가지 않으니 경계를 깔끔하게 유지할 때 쓰기 좋습니다. 채우기도 선택 영역 안에서만 퍼집니다.</p>
+  <p>선택한 뒤 <strong>그 안쪽을 다시 드래그하면 내용이 통째로 움직입니다.</strong> 원래 자리는 비워지고 옮긴 자리에 붙습니다. 마우스를 떼기 전까지는 계속 옮길 수 있고, 물방울 효과도 실시간으로 다시 계산돼서 이동 중에 모양이 어떻게 이어지는지 바로 보입니다.</p>
+  <p><code>Delete</code>로 선택 영역을 비우고, <code>Ctrl+D</code>로 선택을 풉니다. 왼쪽 도구 막대 맨 아래 X 버튼도 같은 역할입니다.</p>
+
+  <h2>레이어 — 여기가 핵심입니다</h2>
+  <p>다른 툴에서 레이어는 그냥 정리용이지만, 이 에디터에서는 모양 자체가 달라집니다. <strong>물방울은 같은 레이어 안에서만 서로 붙습니다.</strong></p>
+  <p>예를 들어 캐릭터 몸통과 눈동자를 한 레이어에 그리면 눈이 얼굴에 녹아 붙어버립니다. 눈을 따로 레이어로 빼면 얼굴 위에 동그란 방울로 얌전히 떠 있게 되고요. 붙이고 싶은 건 같은 레이어, 떼어놓고 싶은 건 다른 레이어. 이 규칙만 잡으면 대부분 원하는 그림이 나옵니다.</p>
+  <p>레이어 이름은 더블클릭해서 바꿉니다. 눈 아이콘으로 잠깐 숨기고, 슬라이더로 불투명도를 낮춰 밑그림처럼 깔아둘 수도 있습니다. '아래와 병합'은 위 레이어를 아래로 합치는데, 합치고 나면 두 레이어 그림이 서로 붙어버리니 되돌리기를 각오하고 누르세요.</p>
+
+  <h2>색</h2>
+  <p>기본 팔레트 24색이 깔려 있고, 위쪽 색상 상자를 누르면 아무 색이나 고를 수 있습니다. HEX 코드를 직접 붙여넣어도 됩니다.</p>
+  <p>'같은 색끼리만 붙이기'를 꺼두면 색이 달라도 실루엣 하나로 이어집니다. 그림자색으로 아래쪽을 칠해도 덩어리가 갈라지지 않아서, 명암 넣을 때는 보통 꺼두는 쪽이 낫습니다. 켜면 색마다 따로 노는 방울이 돼서 구슬이나 사탕 알갱이 표현에 어울립니다.</p>
+
+  <h2>단축키</h2>
+  <pre><code>B  연필        E  지우개       G  채우기
+I  스포이드     M  영역 선택     Alt+클릭  색 집기
+[  ]  브러시 굵기
+Ctrl+Z  되돌리기 (60단계)
+Ctrl+Shift+Z  다시 하기
+Delete  선택 영역 비우기
+Ctrl+D  선택 해제
+Ctrl+휠  확대 / 축소</code></pre>
+
+  <h2>저장</h2>
+  <p>오른쪽 아래 '프로젝트 저장'은 레이어와 슬라이더 값까지 JSON 파일로 내려받습니다. 이어서 작업하려면 '불러오기'로 그 파일을 다시 열면 됩니다. 자동 저장은 없습니다. 브라우저 탭을 닫으면 그냥 사라지니 중간중간 눌러두세요.</p>
+  <p>완성본은 'PNG로 내보내기'입니다. 배율과 효과 적용 여부는 <a href="guide-unity.html">유니티 가이드</a>에서 자세히 다뤘습니다.</p>
+
+  <hr>
+  <p><a href="guide-blob.html">다음 글 — 둥글기·이음새·광택 슬라이더 이해하기 →</a></p>
+</main>
+
+<div class="ad">
+  <span class="ad-label">Sponsored</span>
+  <div class="ad-inner">
+    <!-- 애드센스 승인 후 주석 해제
+    <ins class="adsbygoogle" style="display:block;width:100%"
+         data-ad-client="ca-pub-0000000000000000" data-ad-slot="0000000000"
+         data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+    AD SLOT
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> 물방울</span>
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="./">홈</a>
+    <span class="spacer"></span>
+    <span>문의 your-email@example.com</span>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

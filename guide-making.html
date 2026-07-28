@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>픽셀을 물방울처럼 이어붙이는 방법 — 만든 이야기</title>
+<meta name="description" content="블러 필터로 흉내내지 않고 벡터 곡선으로 직접 그린 과정. 이웃 픽셀을 보고 모서리를 결정하는 규칙과, 색 경계에 흰 선이 생기던 문제를 해결한 방법.">
+<link rel="canonical" href="https://mulbangul.com/guide-making.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="home" href="./"><b>물방울</b><span>pixel studio</span></a>
+  <div class="links">
+    <a href="guide-start.html">사용법</a>
+    <a href="guide-unity.html">유니티</a>
+    <a href="guide-making.html">개발기</a>
+    <a class="go" href="editor.html">에디터 열기</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <p class="eyebrow" style="margin-top:44px">개발기</p>
+  <h1 style="margin-top:0">픽셀을 물방울처럼<br>이어붙이는 방법</h1>
+  <p class="lede">블러를 씌우는 방법이 제일 쉬운데, 확대하면 다 티가 납니다. 결국 곡선을 직접 그리기로 했습니다.</p>
+
+  <h2>안 된 방법들</h2>
+  <p>처음엔 CSS로 해보려 했습니다. 픽셀마다 div를 놓고 <code>border-radius</code>를 주는 식이요. 픽셀 하나는 잘 동그래지는데, 두 개가 붙으면 그냥 알약 두 개가 겹친 모양이 나옵니다. 붙는 자리가 어색해요. 32×32면 div가 천 개라 성능도 좋을 리 없고요.</p>
+  <p>두 번째로 <strong>블러 + 대비</strong>를 시도했습니다. 그림을 흐리게 만든 다음 특정 밝기 이상만 남기는, 흔히 메타볼이라고 부르는 기법입니다. 이건 모양은 그럴듯하게 나옵니다. 실제로 <code>filter: blur() contrast()</code> 몇 줄이면 되고요.</p>
+  <p>문제는 확대였습니다. 결과물을 8배로 뽑으면 경계가 물컹하게 번지고, 그림자색을 넣으면 색끼리 섞여서 원래 팔레트가 사라집니다. 무엇보다 원본 픽셀 위치를 알 수 없게 돼서, 한 칸 차이로 붙었다 떨어졌다 하는 그 미묘한 조절이 불가능했습니다.</p>
+  <p>그래서 방향을 바꿨습니다. <strong>흐리게 만들어서 뭉치는 것처럼 보이게 하는 게 아니라, 뭉친 모양을 곡선으로 정확히 계산해서 그리자.</strong></p>
+
+  <h2>규칙은 모서리 네 개</h2>
+  <p>각 픽셀을 사각형으로 그리되, 네 모서리를 각각 어떻게 처리할지 이웃을 보고 정합니다. 왼쪽 위 모서리를 예로 들면 위 칸, 왼쪽 칸, 왼쪽 위 대각선 칸을 봅니다.</p>
+  <ul>
+    <li>위도 비었고 왼쪽도 비었다 → <strong>둥글게 깎는다.</strong> 바깥으로 튀어나온 모서리니까요.</li>
+    <li>한쪽만 차 있다 → <strong>각지게 둔다.</strong> 이웃과 이어지는 변이라 건드리면 틈이 생깁니다.</li>
+    <li>위도 왼쪽도 차 있는데 대각선만 비었다 → <strong>오목하게 살을 채운다.</strong> ㄱ자로 꺾이는 안쪽 구석입니다.</li>
+    <li>넷 다 차 있다 → 아무것도 안 한다.</li>
+  </ul>
+  <p>세 번째가 물방울처럼 보이게 하는 핵심입니다. 물방울 두 개가 붙으면 만나는 자리가 잘록하게 이어지는데, 그 곡선이 바로 이 오목한 살입니다. 이걸 빼고 나면 그냥 모서리 둥근 도트예요.</p>
+
+  <svg viewBox="0 0 460 100" style="width:100%;max-width:620px;height:auto;display:block;margin:26px 0 10px" role="img" aria-label="이웃 상태에 따라 모서리가 어떻게 처리되는지 보여주는 네 가지 예시">
+    <g fill="none" stroke="#2c4b59" stroke-width="1" stroke-dasharray="3 3">
+      <g transform="translate(10,32) scale(.6)"><rect x="30" y="0" width="30" height="30"/></g>
+      <g transform="translate(130,32) scale(.6)"><rect x="0" y="0" width="30" height="30"/><rect x="30" y="0" width="30" height="30"/></g>
+      <g transform="translate(250,14) scale(.6)"><rect x="0" y="0" width="30" height="30"/><rect x="0" y="30" width="30" height="30"/><rect x="30" y="30" width="30" height="30"/></g>
+      <g transform="translate(370,14) scale(.6)"><rect x="30" y="0" width="30" height="30"/><rect x="0" y="30" width="30" height="30"/></g>
+    </g>
+    <g fill="#4fd6e4">
+      <path transform="translate(10,32) scale(.6)" d="M45 0L45 0A15 15 0 0 1 60 15L60 15A15 15 0 0 1 45 30L45 30A15 15 0 0 1 30 15L30 15A15 15 0 0 1 45 0Z"/>
+      <path transform="translate(130,32) scale(.6)" d="M15 0L30.4 0L30.4 30L15 30A15 15 0 0 1 0 15L0 15A15 15 0 0 1 15 0ZM29.6 0L45 0A15 15 0 0 1 60 15L60 15A15 15 0 0 1 45 30L29.6 30L29.6 0Z"/>
+      <path transform="translate(250,14) scale(.6)" d="M15 0L15 0A15 15 0 0 1 30 15L30 30.4L0 30.4L0 15A15 15 0 0 1 15 0ZM0 29.6L30.4 29.6L30.4 60L15 60A15 15 0 0 1 0 45L0 45L0 29.6ZM30 15L30 30L45 30A15 15 0 0 1 30 15ZM29.6 30L45 30A15 15 0 0 1 60 45L60 45A15 15 0 0 1 45 60L29.6 60L29.6 30Z"/>
+      <path transform="translate(370,14) scale(.6)" d="M45 0L45 0A15 15 0 0 1 60 15L60 15A15 15 0 0 1 45 30L45 30A15 15 0 0 1 30 15L30 15A15 15 0 0 1 45 0ZM15 30L15 30A15 15 0 0 1 30 45L30 45A15 15 0 0 1 15 60L15 60A15 15 0 0 1 0 45L0 45A15 15 0 0 1 15 30Z"/>
+    </g>
+    <g fill="#8aa9b6" font-family="IBM Plex Mono, monospace" font-size="9.5">
+      <text x="10" y="90">한 칸</text>
+      <text x="130" y="90">가로로 두 칸</text>
+      <text x="250" y="90">ㄱ자 — 오목한 이음새</text>
+      <text x="370" y="90">대각선 — 안 붙음</text>
+    </g>
+  </svg>
+  <p style="color:var(--dim);font-size:13.5px">점선이 원래 찍은 도트, 채워진 부분이 실제로 그려지는 모양입니다.</p>
+
+  <h2>중복 걱정은 안 해도 됐다</h2>
+  <p>오목한 구석 하나를 여러 픽셀이 동시에 그리려고 하면 어쩌지 싶었습니다. ㄱ자 모양에서 그 구석에 닿아 있는 픽셀이 세 개니까요.</p>
+  <p>종이에 그려보니 그럴 일이 없었습니다. 조건이 '가로세로 이웃 둘 다 있고 대각선은 없음'인데, 세 픽셀 중 그 조건을 만족하는 건 항상 안쪽 하나뿐이더라고요. 나머지 둘은 대각선 자리에 이웃이 있어서 조건에서 탈락합니다. 덕분에 중복 체크 코드를 넣을 필요가 없었습니다.</p>
+
+  <h2>색 경계의 흰 실선</h2>
+  <p>여기서 하루를 썼습니다. 몸통을 하늘색으로 칠하고 아래쪽에 진한 파랑으로 그림자를 넣었더니, 두 색이 만나는 자리에 머리카락 같은 흰 선이 그어졌습니다.</p>
+  <p>원인은 안티에일리어싱이었습니다. 색이 다르면 다른 경로로 따로 칠하는데, 사각형 두 개가 딱 붙어 있어도 각각의 경계 픽셀은 반투명하게 칠해집니다. 그 반투명 둘이 겹쳐도 완전히 불투명해지지 않아서 뒤 배경이 살짝 비치는 거죠.</p>
+  <p>해결은 허무할 정도로 간단했습니다. <strong>이웃이 있는 변만 0.5픽셀씩 늘려서 살짝 겹치게</strong> 만들었습니다. 겹치는 부분은 어차피 나중에 칠한 색이 덮으니까 보이지 않고, 틈은 사라집니다. 둥글게 깎는 모서리는 애초에 이웃이 없는 자리라 이 처리의 영향을 안 받습니다.</p>
+  <p>같은 색끼리는 애초에 경로 하나에 다 몰아넣어서 한 번에 칠합니다. 그러면 브라우저가 합쳐진 도형 전체를 기준으로 계산하기 때문에 내부 경계선이 아예 생기지 않습니다.</p>
+
+  <h2>광택은 모양을 어긋나게 겹쳐서</h2>
+  <p>입체감을 주고 싶은데, 덩어리 모양이 매번 달라지니 그라데이션을 미리 정해둘 수가 없었습니다.</p>
+  <p>그래서 전체 실루엣을 하나 만들어두고, 그걸 오른쪽 아래로 살짝 민 복사본을 뺐습니다. 남는 건 왼쪽 위 가장자리를 따라 흐르는 초승달 모양이고, 여기에 흰색을 옅게 칠하면 하이라이트가 됩니다. 반대 방향으로 하면 그림자고요. 모양이 어떻게 생겼든 실루엣만 있으면 알아서 따라가서, 코드 열 줄로 끝났습니다.</p>
+
+  <h2>검증은 눈으로</h2>
+  <p>곡선 방향 하나만 틀려도 도형이 뒤집히는데, 코드만 봐서는 절대 못 잡습니다. 그래서 같은 계산을 짧은 스크립트로 다시 짜서 이미지 파일로 뽑아놓고, 십자 · ㄱ자 · 대각선 · 외딴 점 같은 경우를 한 화면에 늘어놓고 확인했습니다.</p>
+  <p>실제로 이 과정에서 오목한 곡선이 반대로 부풀어 있는 걸 발견했습니다. 각도 계산에서 회전 방향을 뒤집어 잡은 거였는데, 화면으로 안 봤으면 한참 못 찾았을 겁니다.</p>
+
+  <h2>남은 것들</h2>
+  <p>지금은 사각형 격자만 지원합니다. 육각 격자를 넣으면 물방울 느낌이 더 살 것 같은데 좌표 계산을 처음부터 다시 해야 해서 미뤄뒀습니다.</p>
+  <p>SVG로 내보내기도 넣고 싶습니다. 이미 곡선 데이터로 계산하고 있어서 그대로 뽑기만 하면 되는데, 여러 색이 겹치는 부분 처리가 생각보다 지저분해서 아직입니다.</p>
+  <p>써보다가 이상한 점이나 있었으면 하는 기능이 있으면 아래 메일로 알려주세요.</p>
+
+  <hr>
+  <p><a href="editor.html">에디터에서 직접 해보기 →</a></p>
+</main>
+
+<div class="ad">
+  <span class="ad-label">Sponsored</span>
+  <div class="ad-inner">
+    <!-- 애드센스 승인 후 주석 해제
+    <ins class="adsbygoogle" style="display:block;width:100%"
+         data-ad-client="ca-pub-0000000000000000" data-ad-slot="0000000000"
+         data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+    AD SLOT
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> 물방울</span>
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="./">홈</a>
+    <span class="spacer"></span>
+    <span>문의 your-email@example.com</span>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

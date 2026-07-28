@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>둥글기·이음새·광택 슬라이더 이해하기 — 물방울</title>
+<meta name="description" content="슬라이더 세 개를 어떻게 조합하느냐에 따라 같은 도트가 사탕도 되고 슬라임도 됩니다. 값별로 어떤 모양이 나오는지 정리했습니다.">
+<link rel="canonical" href="https://mulbangul.com/guide-blob.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="home" href="./"><b>물방울</b><span>pixel studio</span></a>
+  <div class="links">
+    <a href="guide-start.html">사용법</a>
+    <a href="guide-unity.html">유니티</a>
+    <a href="guide-making.html">개발기</a>
+    <a class="go" href="editor.html">에디터 열기</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <p class="eyebrow" style="margin-top:44px">가이드 02</p>
+  <h1 style="margin-top:0">슬라이더 세 개</h1>
+  <p class="lede">둥글기, 이음새, 광택. 이름만 봐서는 비슷해 보이는데 건드리는 부분이 완전히 다릅니다.</p>
+
+  <h2>둥글기 — 바깥 모서리</h2>
+  <p>픽셀의 <strong>튀어나온 모서리</strong>를 얼마나 깎을지 정합니다. 정확히는 위아래 이웃과 좌우 이웃이 둘 다 비어 있는 모서리만 깎입니다.</p>
+  <p>0%면 각진 도트 그대로고, 100%면 반지름이 픽셀 절반까지 커져서 외따로 떨어진 픽셀 하나가 완전한 원이 됩니다. 가로로 세 칸 이어 찍으면 양 끝만 둥근 알약 모양이 되고요.</p>
+  <p>중간값도 꽤 쓸모 있습니다. 30~50% 정도면 도트의 각진 느낌은 남기면서 모서리만 살짝 부드러워져서, 레트로 게임의 CRT 화면 같은 인상이 납니다.</p>
+
+  <h2>이음새 — 안쪽 모서리</h2>
+  <p>이게 물방울처럼 보이게 만드는 진짜 범인입니다. ㄱ자로 꺾이는 <strong>오목한 모서리</strong>에 살을 채워 넣습니다.</p>
+  <p>물방울 두 개를 붙여놓으면 만나는 자리가 잘록하게 이어지죠. 그 잘록한 곡선을 만드는 값입니다. 십자 모양으로 다섯 칸을 찍어보면 차이가 확 보입니다. 이음새가 0%면 각진 십자가 나오고, 100%면 네 방향으로 뻗은 액체 덩어리가 됩니다.</p>
+  <p>재밌는 조합이 하나 있는데, <strong>둥글기 0% + 이음새 100%</strong>로 두면 바깥은 각지고 안쪽만 둥근 모양이 나옵니다. 픽셀아트라기보단 도장 찍은 잉크 자국 같은 질감이라, 이것도 은근히 쓸 데가 있습니다.</p>
+
+  <h2>광택 — 입체감</h2>
+  <p>실루엣을 기준으로 왼쪽 위에 밝은 띠, 오른쪽 아래에 어두운 띠를 얹습니다. 색을 직접 계산하는 게 아니라 모양을 살짝 어긋나게 겹쳐서 만드는 방식이라, 그림이 어떻게 생겼든 알아서 따라갑니다.</p>
+  <p>40~50%가 무난합니다. 80%를 넘기면 유리구슬처럼 반질반질해지는데, 원본 색이 많이 가려져서 팔레트를 신경 써서 짰다면 손해입니다. 도트 느낌을 유지하고 싶으면 0%로 꺼두세요.</p>
+
+  <h2>바로 써먹는 조합</h2>
+  <p>둥글기 / 이음새 / 광택 순서입니다.</p>
+  <ul>
+    <li><strong>물 · 슬라임 100 / 100 / 45</strong> — 기본값. 액체 이펙트, 포션, 점액 몬스터.</li>
+    <li><strong>사탕 · 구슬 100 / 20 / 80</strong> — '같은 색끼리만 붙이기'를 켜면 색마다 알갱이가 따로 놉니다.</li>
+    <li><strong>젤리 70 / 90 / 30</strong> — 말랑한데 형태는 유지되는 느낌.</li>
+    <li><strong>부드러운 도트 35 / 30 / 0</strong> — UI 아이콘용. 각을 살짝만 죽입니다.</li>
+    <li><strong>원본 도트 0 / 0 / 0</strong> — 효과 없이 순수 픽셀아트. 이 상태로 내보내면 일반 픽셀 스프라이트가 나옵니다.</li>
+  </ul>
+
+  <h2>그리는 요령</h2>
+  <p>이 렌더링 방식은 <strong>덩어리가 클수록 심심해집니다.</strong> 8×8 통짜 사각형을 칠하면 그냥 모서리 둥근 네모 한 개예요. 재미는 픽셀이 흩어지고 뭉치는 경계에서 나옵니다.</p>
+  <p>그래서 물이 떨어지는 이펙트를 그린다면, 큰 덩어리 하나보다 <strong>큰 덩어리 하나 + 살짝 떨어진 작은 점 두세 개</strong>가 훨씬 그럴듯합니다. 떨어져 나온 점은 자동으로 완전한 원이 되니까 튄 물방울처럼 보이거든요.</p>
+  <p>대각선으로만 닿은 픽셀은 붙지 않고 꼭짓점에서 만나기만 합니다. 이걸 이용하면 방울이 갈라지기 직전의 아슬아슬한 느낌을 낼 수 있습니다. 반대로 붙이고 싶으면 사이에 한 칸을 채워주면 됩니다.</p>
+  <p>그리는 동안에는 확대를 크게 해두는 게 좋습니다. 8배 이하로 보면 곡선이 뭉개져서 판단이 안 돼요.</p>
+
+  <hr>
+  <p><a href="guide-unity.html">다음 글 — 유니티에 스프라이트로 넣기 →</a></p>
+</main>
+
+<div class="ad">
+  <span class="ad-label">Sponsored</span>
+  <div class="ad-inner">
+    <!-- 애드센스 승인 후 주석 해제
+    <ins class="adsbygoogle" style="display:block;width:100%"
+         data-ad-client="ca-pub-0000000000000000" data-ad-slot="0000000000"
+         data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+    AD SLOT
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> 물방울</span>
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="./">홈</a>
+    <span class="spacer"></span>
+    <span>문의 code6150@gmail.com</span>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

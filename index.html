@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>물방울 — 픽셀이 물처럼 뭉치는 무료 픽셀아트 에디터</title>
+<meta name="description" content="찍은 픽셀끼리 표면장력처럼 이어붙는 웹 픽셀아트 에디터입니다. 설치 없이 브라우저에서 그리고, 효과가 적용된 상태 그대로 PNG로 저장하세요.">
+<link rel="canonical" href="https://mulbangul.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="물방울 — 픽셀이 물처럼 뭉치는 픽셀아트 에디터">
+<meta property="og:description" content="설치 없이 브라우저에서 쓰는 무료 픽셀아트 툴. 픽셀 모서리가 둥글어지고 이웃한 픽셀끼리 액체처럼 이어집니다.">
+<meta property="og:url" content="https://mulbangul.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<!-- 애드센스 승인 후 ca-pub-0000000000000000 부분을 본인 번호로 바꾸세요 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="home" href="./"><b>물방울</b><span>pixel studio</span></a>
+  <div class="links">
+    <a href="guide-start.html">사용법</a>
+    <a href="guide-unity.html">유니티</a>
+    <a href="guide-making.html">개발기</a>
+    <a class="go" href="editor.html">에디터 열기</a>
+  </div>
+</nav>
+
+<main>
+<div class="wide">
+
+  <p class="eyebrow" style="margin-top:56px">브라우저에서 바로 · 설치 없음 · 무료</p>
+  <h1 style="margin-top:0;font-size:clamp(30px,5.4vw,50px);max-width:16ch">픽셀을 찍으면<br>물방울처럼 뭉칩니다</h1>
+  <p class="lede" style="max-width:52ch">도트를 그대로 두면 각진 사각형이지만, 이 에디터는 픽셀 모서리를 둥글리고 옆 픽셀과 만나는 자리에 표면장력 같은 이음새를 만들어줍니다. 화면에 보이는 그 상태 그대로 PNG로 저장됩니다.</p>
+
+  <svg viewBox="0 0 380 112" style="width:100%;max-width:560px;height:auto;display:block;margin:8px 0 34px" role="img" aria-label="같은 도트 그림을 일반 픽셀과 물방울 렌더링으로 비교한 그림">
+    <g transform="translate(0,2)" fill="#3f6273">
+      <path d="M18 0h18v18h-18ZM36 0h18v18h-18ZM90 0h18v18h-18ZM108 0h18v18h-18ZM0 18h18v18h-18ZM18 18h18v18h-18ZM36 18h18v18h-18ZM54 18h18v18h-18ZM72 18h18v18h-18ZM90 18h18v18h-18ZM108 18h18v18h-18ZM126 18h18v18h-18ZM0 36h18v18h-18ZM18 36h18v18h-18ZM36 36h18v18h-18ZM54 36h18v18h-18ZM72 36h18v18h-18ZM90 36h18v18h-18ZM108 36h18v18h-18ZM126 36h18v18h-18ZM18 54h18v18h-18ZM36 54h18v18h-18ZM54 54h18v18h-18ZM72 54h18v18h-18ZM90 54h18v18h-18ZM108 54h18v18h-18ZM36 72h18v18h-18ZM54 72h18v18h-18ZM72 72h18v18h-18ZM90 72h18v18h-18ZM54 90h18v18h-18ZM72 90h18v18h-18Z" transform="scale(.63)"/>
+    </g>
+    <path d="M104 55h22M120 50l7 5-7 5" stroke="#2c4b59" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(140,2)" fill="#4fd6e4">
+      <path d="M27 0L36.4 0L36.4 18.4L18 18.4L18 9A9 9 0 0 1 27 0ZM35.6 0L45 0A9 9 0 0 1 54 9L54 18.4L35.6 18.4L35.6 0ZM99 0L108.4 0L108.4 18.4L90 18.4L90 9A9 9 0 0 1 99 0ZM107.6 0L117 0A9 9 0 0 1 126 9L126 18.4L107.6 18.4L107.6 0ZM9 18L18.4 18L18.4 36.4L0 36.4L0 27A9 9 0 0 1 9 18ZM17.6 17.6L36.4 17.6L36.4 36.4L17.6 36.4L17.6 17.6ZM18 9L18 18L9 18A9 9 0 0 0 18 9ZM35.6 17.6L54.4 17.6L54.4 36.4L35.6 36.4L35.6 17.6ZM54 9L54 18L63 18A9 9 0 0 1 54 9ZM53.6 18L72.4 18L72.4 36.4L53.6 36.4L53.6 18ZM71.6 18L90.4 18L90.4 36.4L71.6 36.4L71.6 18ZM89.6 17.6L108.4 17.6L108.4 36.4L89.6 36.4L89.6 17.6ZM90 9L90 18L81 18A9 9 0 0 0 90 9ZM107.6 17.6L126.4 17.6L126.4 36.4L107.6 36.4L107.6 17.6ZM126 9L126 18L135 18A9 9 0 0 1 126 9ZM125.6 18L135 18A9 9 0 0 1 144 27L144 36.4L125.6 36.4L125.6 18ZM0 35.6L18.4 35.6L18.4 54L9 54A9 9 0 0 1 0 45L0 35.6ZM17.6 35.6L36.4 35.6L36.4 54.4L17.6 54.4L17.6 35.6ZM18 63L18 54L9 54A9 9 0 0 1 18 63ZM35.6 35.6L54.4 35.6L54.4 54.4L35.6 54.4L35.6 35.6ZM53.6 35.6L72.4 35.6L72.4 54.4L53.6 54.4L53.6 35.6ZM71.6 35.6L90.4 35.6L90.4 54.4L71.6 54.4L71.6 35.6ZM89.6 35.6L108.4 35.6L108.4 54.4L89.6 54.4L89.6 35.6ZM107.6 35.6L126.4 35.6L126.4 54.4L107.6 54.4L107.6 35.6ZM126 63L126 54L135 54A9 9 0 0 0 126 63ZM125.6 35.6L144 35.6L144 45A9 9 0 0 1 135 54L125.6 54L125.6 35.6ZM18 53.6L36.4 53.6L36.4 72L27 72A9 9 0 0 1 18 63L18 53.6ZM35.6 53.6L54.4 53.6L54.4 72.4L35.6 72.4L35.6 53.6ZM36 81L36 72L27 72A9 9 0 0 1 36 81ZM53.6 53.6L72.4 53.6L72.4 72.4L53.6 72.4L53.6 53.6ZM71.6 53.6L90.4 53.6L90.4 72.4L71.6 72.4L71.6 53.6ZM89.6 53.6L108.4 53.6L108.4 72.4L89.6 72.4L89.6 53.6ZM108 81L108 72L117 72A9 9 0 0 0 108 81ZM107.6 53.6L126 53.6L126 63A9 9 0 0 1 117 72L107.6 72L107.6 53.6ZM36 71.6L54.4 71.6L54.4 90L45 90A9 9 0 0 1 36 81L36 71.6ZM53.6 71.6L72.4 71.6L72.4 90.4L53.6 90.4L53.6 71.6ZM54 99L54 90L45 90A9 9 0 0 1 54 99ZM71.6 71.6L90.4 71.6L90.4 90.4L71.6 90.4L71.6 71.6ZM90 99L90 90L99 90A9 9 0 0 0 90 99ZM89.6 71.6L108 71.6L108 81A9 9 0 0 1 99 90L89.6 90L89.6 71.6ZM54 89.6L72.4 89.6L72.4 108L63 108A9 9 0 0 1 54 99L54 89.6ZM71.6 89.6L90 89.6L90 99A9 9 0 0 1 81 108L71.6 108L71.6 89.6Z" transform="scale(.63)"/>
+    </g>
+  </svg>
+
+  <p style="margin-bottom:44px">
+    <a class="btn" href="editor.html">에디터 열기</a>
+    <a class="btn ghost" href="guide-start.html" style="margin-left:8px">먼저 사용법 보기</a>
+  </p>
+
+  <div class="grid g3" style="margin-bottom:20px">
+    <div class="card">
+      <h3>혼자 있으면 방울, 붙으면 하나</h3>
+      <p>픽셀 하나만 찍으면 완전한 원이 되고, 옆에 하나 더 찍으면 두 방울이 합쳐진 것처럼 이어집니다. ㄱ자로 꺾이는 안쪽 모서리에는 오목한 이음새가 생겨요.</p>
+    </div>
+    <div class="card">
+      <h3>보이는 대로 저장</h3>
+      <p>효과를 미리보기로만 쓰고 저장하면 각진 도트가 나오는 툴이 많습니다. 여기서는 화면에 렌더된 그 모양 그대로 최대 32배 확대해서 PNG로 나갑니다.</p>
+    </div>
+    <div class="card">
+      <h3>있을 건 다 있음</h3>
+      <p>연필, 지우개, 페인트통, 스포이드, 영역 선택과 이동, 레이어(순서·불투명도·병합), 되돌리기 60단계. 작업 파일은 JSON으로 저장하고 다시 불러올 수 있습니다.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="ad">
+  <span class="ad-label">Sponsored</span>
+  <div class="ad-inner">
+    <!-- 애드센스 승인 후 아래 주석을 풀고 slot 번호를 바꾸세요
+    <ins class="adsbygoogle" style="display:block;width:100%"
+         data-ad-client="ca-pub-0000000000000000"
+         data-ad-slot="0000000000"
+         data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+    AD SLOT
+  </div>
+</div>
+
+<div class="wrap">
+  <h2>이걸 왜 만들었냐면</h2>
+  <p>게임에 쓸 물 이펙트를 찍다가 막혔습니다. 도트로 물방울을 표현하려면 결국 안티에일리어싱을 손으로 찍어야 하는데, 32×32 안에서 그걸 하면 물이 아니라 그냥 얼룩처럼 보이더라고요. 반대로 벡터 툴로 그리면 매끈하긴 한데 픽셀아트 특유의 절제된 느낌이 사라집니다.</p>
+  <p>그래서 <strong>찍는 건 도트로, 보이는 건 액체로</strong> 하면 되지 않나 싶었습니다. 격자 위에 픽셀을 찍되, 화면에 그릴 때 각 픽셀의 이웃을 보고 모서리를 둥글릴지 말지 결정하는 방식이요. 검색해보니 이미 있는 툴들은 대부분 후처리 필터(블러 + 대비)로 비슷한 걸 흉내내는데, 그건 확대하면 경계가 흐물흐물해집니다. 벡터 곡선으로 직접 그리면 몇 배로 키워도 깨끗하고요.</p>
+  <p>만드는 과정에서 제일 오래 붙잡은 건 대각선으로만 닿은 픽셀 처리였습니다. 자세한 건 <a href="guide-making.html">개발기</a>에 적어뒀습니다.</p>
+
+  <h2>읽어볼 만한 글</h2>
+  <div class="toc">
+    <a href="guide-start.html"><b>처음 쓰는 법</b><span>도구 다섯 개, 레이어, 단축키. 5분이면 익숙해집니다.</span></a>
+    <a href="guide-blob.html"><b>둥글기·이음새·광택 슬라이더 이해하기</b><span>세 개 조합에 따라 사탕, 젤리, 물방울, 슬라임까지 갑니다.</span></a>
+    <a href="guide-unity.html"><b>유니티에 스프라이트로 넣기</b><span>몇 배로 뽑아야 하는지, Filter Mode는 뭘로 둘지.</span></a>
+    <a href="guide-making.html"><b>만든 이야기</b><span>대각선 픽셀 때문에 이틀 날린 얘기와 해결법.</span></a>
+  </div>
+
+  <h2>자주 묻는 것</h2>
+  <h3>무료인가요?</h3>
+  <p>네. 로그인도 없습니다. 그림 데이터는 브라우저 안에서만 처리되고 서버로 올라가지 않습니다.</p>
+  <h3>휴대폰에서도 되나요?</h3>
+  <p>됩니다. 다만 화면이 좁으면 오른쪽 패널이 눌려서 태블릿이나 데스크톱을 권합니다.</p>
+  <h3>작업하던 걸 이어서 하려면?</h3>
+  <p>오른쪽 아래 '프로젝트 저장'을 누르면 JSON 파일이 내려받아집니다. 다음에 '불러오기'로 그 파일을 열면 레이어와 슬라이더 설정까지 그대로 복구됩니다. 자동 저장은 없으니 자리 뜨기 전에 한 번씩 눌러주세요.</p>
+  <h3>상업적으로 써도 되나요?</h3>
+  <p>여기서 그린 그림은 그린 사람 것입니다. 게임에 넣든 굿즈로 팔든 상관없습니다.</p>
+</div>
+
+<div class="wide" style="margin-top:56px">
+  <div class="card" style="text-align:center;padding:34px 20px">
+    <h3 style="font-family:var(--font-d);font-size:22px">한 픽셀만 찍어봐도 감이 옵니다</h3>
+    <p style="color:var(--dim);max-width:44ch;margin:0 auto 18px">빈 캔버스가 열려 있고, 슬라이더는 이미 물방울 쪽으로 맞춰져 있습니다.</p>
+    <a class="btn" href="editor.html">에디터 열기</a>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> 물방울</span>
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="guide-start.html">사용법</a>
+    <span class="spacer"></span>
+    <span>문의 your-email@example.com</span>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
