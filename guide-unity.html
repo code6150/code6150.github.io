@@ -2,96 +2,12 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>유니티에 스프라이트로 넣기 — 물방울</title>
-<meta name="description" content="몇 배로 내보내야 하는지, Filter Mode와 Pixels Per Unit은 뭘로 둘지. 곡선이 계단처럼 깨질 때 확인할 것들.">
-<link rel="canonical" href="https://mulbangul.com/guide-unity.html">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+<title>이동 중…</title>
+<link rel="canonical" href="https://mulbangul.com/guide/unity/">
+<meta http-equiv="refresh" content="0; url=/guide/unity/">
+<meta name="robots" content="noindex">
 </head>
-<body>
-
-<nav class="nav">
-  <a class="home" href="./"><b>물방울</b><span>pixel studio</span></a>
-  <div class="links">
-    <a href="guide-start.html">사용법</a>
-    <a href="guide-unity.html">유니티</a>
-    <a href="guide-making.html">개발기</a>
-    <a class="go" href="editor.html">에디터 열기</a>
-  </div>
-</nav>
-
-<main class="wrap">
-  <p class="eyebrow" style="margin-top:44px">가이드 03</p>
-  <h1 style="margin-top:0">유니티에 넣기</h1>
-  <p class="lede">일반 픽셀아트랑 세팅이 다릅니다. 늘 하던 대로 Point 필터에 압축 끄고 넣으면 곡선이 계단처럼 깨집니다.</p>
-
-  <h2>왜 세팅이 다른가</h2>
-  <p>보통 픽셀아트 스프라이트는 <strong>계단이 살아 있어야</strong> 제맛이라 Filter Mode를 Point로 둡니다. 그런데 물방울 렌더링으로 뽑은 이미지는 픽셀아트가 아니라 <strong>곡선이 들어간 그림</strong>입니다. 곡선 경계에는 부드러운 중간 색이 들어 있는데, Point로 두면 그 중간 색이 뭉텅뭉텅 잘려서 곡선이 톱니처럼 보입니다.</p>
-  <p>정리하면 이렇습니다. 효과를 끄고 내보냈다면 기존 픽셀아트 세팅 그대로, 효과를 켜고 내보냈다면 일반 이미지 세팅입니다.</p>
-
-  <h2>내보내기 배율</h2>
-  <p>내보내기 배율은 <strong>게임에서 실제로 보이는 크기보다 넉넉하게</strong> 잡으세요. 화면에서 128픽셀쯤 차지할 32×32 그림이면 8배(256×256) 정도가 적당합니다. 여유가 있으면 16배로 뽑아두고 유니티에서 Max Size로 줄이는 것도 방법입니다. 반대로 작게 뽑아서 게임에서 키우면 곡선이 흐려집니다.</p>
-  <p>확대해서 뽑아도 파일이 크게 무겁진 않습니다. 색이 몇 개 안 되는 단순한 그림이라 PNG 압축이 잘 먹거든요. 32×32를 16배로 뽑은 512×512 파일이 보통 몇십 KB 수준입니다.</p>
-
-  <h2>임포트 설정</h2>
-  <p>PNG를 프로젝트에 끌어다 놓고 인스펙터에서 이렇게 잡습니다.</p>
-  <pre><code>Texture Type      Sprite (2D and UI)
-Sprite Mode       Single
-Pixels Per Unit   내보낸 배율에 맞춰서 (아래 설명)
-Filter Mode       Bilinear      ← Point 아님
-Compression       None 또는 High Quality
-Generate Mip Maps 끄기
-Alpha Is Transparency  켜기</code></pre>
-  <p><strong>Pixels Per Unit</strong>은 원본 도트 기준으로 정하면 계산이 편합니다. 32×32 캔버스를 8배로 뽑았다면 이미지는 256픽셀인데, 원본 한 칸을 유니티 1유닛의 1/32로 쓰고 싶다면 PPU를 256으로 두면 됩니다. 그러면 스프라이트 하나가 정확히 1×1 유닛을 차지합니다.</p>
-  <p><strong>Alpha Is Transparency</strong>를 안 켜면 곡선 가장자리에 검은 테두리가 생기는 경우가 있습니다. 투명한 부분의 RGB 값이 0이라 반투명 픽셀에 검정이 섞여서 그렇습니다. 체크 하나로 해결되니 습관처럼 켜두세요.</p>
-  <p><strong>Mip Maps</strong>는 2D에서는 보통 필요 없습니다. 켜두면 카메라 거리에 따라 흐려진 버전이 쓰여서 애써 뽑은 선명한 곡선이 뭉개집니다.</p>
-
-  <h2>UI로 쓸 때</h2>
-  <p>Image 컴포넌트에 넣을 거라면 위 세팅에 더해서, Canvas의 Pixel Perfect는 꺼두는 편이 낫습니다. 켜져 있으면 스프라이트를 정수 픽셀에 맞춰 스냅시키는데, 곡선 그림에서는 그게 오히려 미세한 떨림으로 보입니다.</p>
-
-  <h2>애니메이션으로 쓰기</h2>
-  <p>물방울이 떨어지거나 튀는 이펙트를 만든다면 프레임마다 PNG를 뽑아서 스프라이트 시트로 묶는 방식이 제일 단순합니다.</p>
-  <p>요령이 하나 있는데, 프레임 사이에서 <strong>픽셀을 급하게 옮기지 말라</strong>는 겁니다. 이 렌더링은 한 칸 차이로 붙었다 떨어졌다 하기 때문에, 픽셀 두세 칸을 한 번에 움직이면 모양이 확 튑니다. 한 프레임에 한 칸씩만 움직이면 방울이 늘어났다가 끊어지는 과정이 자연스럽게 나옵니다. 물방울이 떨어지는 순간을 표현하기엔 오히려 이쪽이 유리합니다.</p>
-
-  <h2>파일이 안 열리거나 이상할 때</h2>
-  <ul>
-    <li><strong>가장자리가 톱니처럼 보임</strong> — Filter Mode가 Point거나, 내보내기 배율이 너무 작습니다.</li>
-    <li><strong>검은 테두리</strong> — Alpha Is Transparency 체크.</li>
-    <li><strong>색이 미묘하게 다름</strong> — Compression이 Normal이면 색이 뭉개집니다. None으로.</li>
-    <li><strong>멀리서 보면 흐림</strong> — Mip Maps 끄기.</li>
-    <li><strong>효과가 아예 안 들어감</strong> — 내보내기 창에서 '물방울 효과 적용해서 저장'이 켜져 있는지 확인하세요. 이게 꺼져 있으면 원본 도트로 나갑니다.</li>
-  </ul>
-
-  <hr>
-  <p><a href="guide-making.html">다음 글 — 만든 이야기 →</a></p>
-</main>
-
-<div class="ad">
-  <span class="ad-label">Sponsored</span>
-  <div class="ad-inner">
-    <!-- 애드센스 승인 후 주석 해제
-    <ins class="adsbygoogle" style="display:block;width:100%"
-         data-ad-client="ca-pub-0000000000000000" data-ad-slot="0000000000"
-         data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    -->
-    AD SLOT
-  </div>
-</div>
-
-<footer>
-  <div class="wrap">
-    <span>© <span id="yr">2026</span> 물방울</span>
-    <a href="privacy.html">개인정보처리방침</a>
-    <a href="./">홈</a>
-    <span class="spacer"></span>
-    <span>문의 code6150@gmail.com</span>
-  </div>
-</footer>
-<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+<body><p>새 주소로 이동합니다. <a href="/guide/unity/">바로 가기</a></p>
+<script>location.replace("/guide/unity/");</script>
 </body>
 </html>

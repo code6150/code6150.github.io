@@ -13,19 +13,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/style.css">
 <!-- 애드센스 승인 후 ca-pub-0000000000000000 부분을 본인 번호로 바꾸세요 -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <nav class="nav">
-  <a class="home" href="./"><b>물방울</b><span>pixel studio</span></a>
+  <a class="home" href="/"><b>물방울</b><span>pixel studio</span></a>
   <div class="links">
-    <a href="guide-start.html">사용법</a>
-    <a href="guide-unity.html">유니티</a>
-    <a href="guide-making.html">개발기</a>
-    <a class="go" href="editor.html">에디터 열기</a>
+    <a href="/guide/start/">사용법</a>
+    <a href="/guide/unity/">유니티</a>
+    <a href="/guide/making/">개발기</a>
+    <a class="go" href="/editor/">에디터 열기</a>
   </div>
 </nav>
 
@@ -47,8 +47,8 @@
   </svg>
 
   <p style="margin-bottom:44px">
-    <a class="btn" href="editor.html">에디터 열기</a>
-    <a class="btn ghost" href="guide-start.html" style="margin-left:8px">먼저 사용법 보기</a>
+    <a class="btn" href="/editor/">에디터 열기</a>
+    <a class="btn ghost" href="/guide/start/" style="margin-left:8px">먼저 사용법 보기</a>
   </p>
 
   <div class="grid g3" style="margin-bottom:20px">
@@ -86,14 +86,14 @@
   <h2>이걸 왜 만들었냐면</h2>
   <p>게임에 쓸 물 이펙트를 찍다가 막혔습니다. 도트로 물방울을 표현하려면 결국 안티에일리어싱을 손으로 찍어야 하는데, 32×32 안에서 그걸 하면 물이 아니라 그냥 얼룩처럼 보이더라고요. 반대로 벡터 툴로 그리면 매끈하긴 한데 픽셀아트 특유의 절제된 느낌이 사라집니다.</p>
   <p>그래서 <strong>찍는 건 도트로, 보이는 건 액체로</strong> 하면 되지 않나 싶었습니다. 격자 위에 픽셀을 찍되, 화면에 그릴 때 각 픽셀의 이웃을 보고 모서리를 둥글릴지 말지 결정하는 방식이요. 검색해보니 이미 있는 툴들은 대부분 후처리 필터(블러 + 대비)로 비슷한 걸 흉내내는데, 그건 확대하면 경계가 흐물흐물해집니다. 벡터 곡선으로 직접 그리면 몇 배로 키워도 깨끗하고요.</p>
-  <p>만드는 과정에서 제일 오래 붙잡은 건 대각선으로만 닿은 픽셀 처리였습니다. 자세한 건 <a href="guide-making.html">개발기</a>에 적어뒀습니다.</p>
+  <p>만드는 과정에서 제일 오래 붙잡은 건 대각선으로만 닿은 픽셀 처리였습니다. 자세한 건 <a href="/guide/making/">개발기</a>에 적어뒀습니다.</p>
 
   <h2>읽어볼 만한 글</h2>
   <div class="toc">
-    <a href="guide-start.html"><b>처음 쓰는 법</b><span>도구 다섯 개, 레이어, 단축키. 5분이면 익숙해집니다.</span></a>
-    <a href="guide-blob.html"><b>둥글기·이음새·광택 슬라이더 이해하기</b><span>세 개 조합에 따라 사탕, 젤리, 물방울, 슬라임까지 갑니다.</span></a>
-    <a href="guide-unity.html"><b>유니티에 스프라이트로 넣기</b><span>몇 배로 뽑아야 하는지, Filter Mode는 뭘로 둘지.</span></a>
-    <a href="guide-making.html"><b>만든 이야기</b><span>대각선 픽셀 때문에 이틀 날린 얘기와 해결법.</span></a>
+    <a href="/guide/start/"><b>처음 쓰는 법</b><span>도구 다섯 개, 레이어, 단축키. 5분이면 익숙해집니다.</span></a>
+    <a href="/guide/blob/"><b>둥글기·이음새·광택 슬라이더 이해하기</b><span>세 개 조합에 따라 사탕, 젤리, 물방울, 슬라임까지 갑니다.</span></a>
+    <a href="/guide/unity/"><b>유니티에 스프라이트로 넣기</b><span>몇 배로 뽑아야 하는지, Filter Mode는 뭘로 둘지.</span></a>
+    <a href="/guide/making/"><b>만든 이야기</b><span>대각선 픽셀 때문에 이틀 날린 얘기와 해결법.</span></a>
   </div>
 
   <h2>자주 묻는 것</h2>
@@ -111,7 +111,7 @@
   <div class="card" style="text-align:center;padding:34px 20px">
     <h3 style="font-family:var(--font-d);font-size:22px">한 픽셀만 찍어봐도 감이 옵니다</h3>
     <p style="color:var(--dim);max-width:44ch;margin:0 auto 18px">빈 캔버스가 열려 있고, 슬라이더는 이미 물방울 쪽으로 맞춰져 있습니다.</p>
-    <a class="btn" href="editor.html">에디터 열기</a>
+    <a class="btn" href="/editor/">에디터 열기</a>
   </div>
 </div>
 
@@ -120,8 +120,8 @@
 <footer>
   <div class="wrap">
     <span>© <span id="yr">2026</span> 물방울</span>
-    <a href="privacy.html">개인정보처리방침</a>
-    <a href="guide-start.html">사용법</a>
+    <a href="/privacy/">개인정보처리방침</a>
+    <a href="/guide/start/">사용법</a>
     <span class="spacer"></span>
     <span>문의 code6150@gmail.com</span>
   </div>
